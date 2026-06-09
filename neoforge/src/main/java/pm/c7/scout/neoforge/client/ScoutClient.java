@@ -2,6 +2,10 @@ package pm.c7.scout.neoforge.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
@@ -40,6 +44,17 @@ public class ScoutClient {
 	public static void onAddLayers(EntityRenderersEvent.AddLayers event) {
 		// Entity renderers are added via mixin or other mechanism on NeoForge
 		// For now we skip the feature renderers - they need the player renderer context
+	}
+
+	@SubscribeEvent
+	public static void addPlayerLayers(EntityRenderersEvent.AddLayers event) {
+		for (PlayerSkin.Model type : event.getSkins()) {
+			PlayerRenderer playerRenderer = event.getSkin(type);
+			if (playerRenderer != null) {
+				playerRenderer.addLayer(new PouchFeatureRenderer<>(playerRenderer, event.getContext().getItemInHandRenderer()));
+				playerRenderer.addLayer(new SatchelFeatureRenderer<>(playerRenderer));
+			}
+		}
 	}
 
 	public static void handleEnableSlots(IPayloadContext context) {

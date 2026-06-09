@@ -30,7 +30,7 @@ public class SatchelModel<T extends LivingEntity> extends HierarchicalModel<T> {
 		PartDefinition root = modelData.getRoot();
 
 		PartDefinition satchel = root.addOrReplaceChild("satchel", CubeListBuilder.create().texOffs(10, 0).addBox(-6.0F, -12.0F, -2.5F, 2.0F, 3.0F, 5.0F, new CubeDeformation(0.275F)), PartPose.offset(0.0F, 24.0F, 0.0F));
-		PartDefinition strap = satchel.addOrReplaceChild("strap", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -13.0F, -2.0F, 1.0F, 14.0F, 4.0F, new CubeDeformation(0.275F)), PartPose.offsetAndRotation(-3.0F, -13.0F, 0.0F, 0.0F, 0.0F, 0.5672F));
+		PartDefinition strap = satchel.addOrReplaceChild("strap", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -13.0F, -2.0F, 1.0F, 14.0F, 4.0F, new CubeDeformation(0.275F, 0.275F, 0.475F)), PartPose.offsetAndRotation(-3.0F, -13.0F, 0.0F, 0.0F, 0.0F, 0.5672F));
 
 		return LayerDefinition.create(modelData, 32, 32);
 	}
